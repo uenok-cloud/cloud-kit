@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>検索数チェック</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1d2733;--sub:#5b6775;--line:#dde3ea;--bg:#f5f7fa;--card:#fff;--navy:#22456e;--navy-soft:#e8eef5;--accent:#cf3a2b;--ok:#1f7a4d;--ok-soft:#e6f4ec;--warn-soft:#fbf3e2}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans JP",sans-serif;line-height:1.7}
+.wrap{max-width:820px;margin:0 auto;padding:24px 16px 60px}
+h1{font-size:22px;margin:0 0 4px;color:var(--navy)}
+.lead{color:var(--sub);font-size:14px;margin:0 0 16px}
+form{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
+label{display:block;font-weight:700;font-size:13px;margin:0 0 4px}
+label small{font-weight:400;color:var(--sub)}
+input{width:100%;font:inherit;font-size:16px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.row3{display:grid;grid-template-columns:2fr 1fr;gap:12px;margin-top:10px}
+button{font:inherit;font-weight:700;cursor:pointer;border:0;border-radius:999px}
+#go{margin-top:14px;width:100%;padding:14px;font-size:16px;color:#fff;background:var(--accent)}
+#go:disabled{opacity:.6;cursor:wait}
+#status{margin-top:10px;font-size:14px;color:var(--navy);min-height:1.5em}
+#status.err{color:var(--accent)}
+.hero{margin-top:18px;background:var(--navy);color:#fff;border-radius:14px;padding:26px 22px;text-align:center}
+.hero .k{font-size:15px;opacity:.9;margin:0}
+.hero .kw{font-size:26px;font-weight:700;margin:2px 0 6px;line-height:1.35}
+.hero .num{font-size:64px;font-weight:900;line-height:1.1;letter-spacing:-.02em;white-space:nowrap}
+.hero .num small{font-size:20px;font-weight:700;margin-left:4px}
+.hero .sub{font-size:14px;opacity:.9;margin:8px 0 0}
+.hero .sub b{font-size:18px}
+.hero .src{font-size:11px;opacity:.75;margin-top:12px}
+.big .hero{position:fixed;inset:0;z-index:9;border-radius:0;display:grid;place-content:center;padding:24px}
+.big .hero .kw{font-size:40px}.big .hero .num{font-size:min(17vw,160px)}.big .hero .sub{font-size:20px}.big .hero .sub b{font-size:28px}
+.hero .close{display:none;position:fixed;top:14px;right:14px;background:rgba(255,255,255,.18);color:#fff;padding:8px 16px;font-size:14px}
+.big .hero .close{display:block}
+section{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-top:14px}
+section h2{font-size:16px;margin:0 0 10px;color:var(--navy)}
+table{width:100%;border-collapse:collapse;font-size:15px}
+td,th{padding:8px 6px;border-top:1px solid var(--line);text-align:left;vertical-align:middle}
+th{font-size:12px;color:var(--sub);font-weight:500;border-top:0}
+td.num{text-align:right;white-space:nowrap;font-weight:700;color:var(--navy)}
+td.num.none{color:var(--sub);font-weight:400;font-size:13px}
+tr.on td{background:#fff6f5}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:1px 7px;border-radius:999px;margin-left:6px;vertical-align:middle}
+.tag.ok{background:var(--ok-soft);color:var(--ok)}
+.tag.area{background:var(--navy-soft);color:var(--navy)}
+svg.sp{width:88px;height:26px;vertical-align:middle}
+.chips span{display:inline-block;background:var(--navy-soft);color:var(--navy);border-radius:999px;padding:3px 10px;font-size:13px;margin:0 6px 6px 0}
+.note{font-size:12px;color:var(--sub);margin:10px 0 0}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.bar button{padding:8px 14px;font-size:14px;border:1px solid var(--line);background:#fff;color:var(--navy)}
+.rule{font-size:13px;color:var(--sub);margin-top:22px;background:#fff;border:1px dashed var(--line);border-radius:10px;padding:12px 16px}
+.warn{background:#fff1b8;color:#7a5200;border-radius:10px;padding:10px 14px;margin-top:14px;font-size:14px;font-weight:700}
+@media(max-width:560px){.row,.row3{grid-template-columns:1fr}.hero .num{font-size:48px}.spcol{display:none}}
+@media print{form,.bar,.rule,.hero .close{display:none}.hero{color:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>検索数チェック</h1>
+  <p class="lead">地域とサービス名を入れると、「その地域でそのサービスを探している人が月に何回検索しているか」が数秒で出ます。</p>
+  <form id="f">
+    <div class="row">
+      <div><label>サービス名</label><input name="service" placeholder="外壁塗装" required autofocus></div>
+      <div><label>地域 <small>（市区町村・都道府県）</small></label><input name="area" placeholder="千葉市"></div>
+    </div>
+    <div class="row3">
+      <div><label>ほかに調べたい言葉 <small>（任意・カンマ区切り）</small></label><input name="extra" placeholder="外壁塗装 千葉市 助成金, 屋根塗装 千葉市"></div>
+      <div><label>都道府県 <small>（市名から分からない時）</small></label><input name="pref" placeholder="千葉県"></div>
+    </div>
+    <button id="go">調べる</button>
+    <div id="status" aria-live="polite"></div>
+  </form>
+  <div id="root"></div>
+  <div class="rule">商談で守ること：検索数は「探している人がいる」根拠としてだけ使う／来訪数・問い合わせ数の見込みは言わない／成果の約束はしない／数字は Google 広告の月平均（概数）で、月ごとに上下する。</div>
+</div>
+<script>
+const f=document.getElementById('f'),st=document.getElementById('status'),go=document.getElementById('go'),root=document.getElementById('root');
+const E=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const N=n=>Number(n).toLocaleString('ja-JP');
+const q=new URLSearchParams(location.search);
+for(const k of ['service','area','extra','pref'])if(q.get(k))f.elements[k].value=q.get(k);
+function spark(m){
+  if(!m||m.length<2)return '';
+  const v=m.map(x=>x.search_volume||0),mx=Math.max(...v,1),w=88,h=26;
+  const pts=v.map((y,i)=>`${(i/(v.length-1))*w},${h-2-(y/mx)*(h-4)}`).join(' ');
+  return `<svg class="sp" viewBox="0 0 ${w} ${h}" aria-label="12か月の推移"><polyline fill="none" stroke="#22456e" stroke-width="1.6" points="${pts}"/></svg>`;
+}
+let CONNECTED=false;
+function vol(r){
+  if(r.volume==null)return `<td class="num none">${CONNECTED?'数字が出ないほど少ない':'未取得'}</td>`;
+  return `<td class="num">月 約${N(r.volume)}回</td>`;
+}
+function render(d){
+  CONNECTED=d.ads_connected&&!d.error;
+  const m=d.main,areaLabel=d.area||'全国';
+  let hero='';
+  if(m&&m.volume!=null){
+    const latest=m.latest!=null&&m.latest!==m.volume?`直近月は <b>約${N(m.latest)}回</b>。`:'';
+    const tot=d.total_area>m.volume?`「${E(d.area)}」を含む関連語を合わせると <b>月 約${N(d.total_area)}回</b>`:'';
+    hero=`<div class="hero" id="hero"><button class="close" type="button" onclick="document.body.classList.remove('big')">閉じる</button>
+      <p class="k">${E(areaLabel)}で「${E(d.service)}」を探している人は</p>
+      <div class="kw">「${E(m.kw)}」</div>
+      <div class="num">月 約${N(m.volume)}<small>回</small></div>
+      <p class="sub">${latest}${tot}</p>
+      <div class="src">${E(d.source)}</div></div>`;
+  }else if(m){
+    hero=`<div class="hero" id="hero"><p class="k">${E(areaLabel)}で「${E(d.service)}」を探している人は</p><div class="kw">「${E(m.kw)}」</div>
+      <div class="num" style="font-size:34px">${d.ads_connected&&!d.error?'数字が出ないほど少ない':'検索数は未取得'}</div>
+      <p class="sub">${d.ads_connected&&!d.error?'Google 広告のデータでは月 10 回未満の扱いになる言葉です。下の関連語や検索候補を見せてください。':'DataForSEO の設定が無いので検索候補だけ表示しています。'}</p></div>`;
+  }
+  const rows=d.rows.map(r=>`<tr class="${r.kw===m?.kw?'on':''}"><td>${E(r.kw)}${r.is_area?'<span class="tag area">地域</span>':''}${r.in_suggest?'<span class="tag ok">Google候補に出る</span>':''}</td><td class="spcol">${spark(r.monthly)}</td>${vol(r)}</tr>`).join('');
+  let region='';
+  if(d.region&&CONNECTED){
+    const g=d.region;
+    region=`<section><h2>${E(g.pref)}の中から「${E(g.kw)}」を検索している人</h2>
+      ${g.volume!=null?`<p style="margin:0;font-size:15px">検索している場所を${E(g.pref)}に絞った数字： <b style="font-size:22px;color:var(--navy)">月 約${N(g.volume)}回</b> ${spark(g.monthly)}</p>
+      <p class="note">地域名を入れずに「${E(g.kw)}」とだけ検索した人も含むので、上の「${E(m?.kw||'')}」より大きくなります。</p>`
+      :`<p class="note">${E(g.error||'数字が出ないほど少ない')}</p>`}</section>`;
+  }
+  root.innerHTML=`${d.error?`<div class="warn">${E(d.error)}</div>`:''}${hero}
+    <div class="bar">${m&&m.volume!=null?'<button type="button" onclick="document.body.classList.add(\'big\')">大きく表示（商談モード）</button>':''}<button type="button" onclick="window.print()">PDF・印刷</button><button type="button" onclick="copyLink()">このページのリンクをコピー</button></div>
+    <section><h2>問い合わせの直前に打たれる言葉と、月の検索数</h2>
+      <table><tr><th>言葉</th><th class="spcol">12か月</th><th style="text-align:right">月平均</th></tr>${rows}</table>
+      <p class="note">「地域」の付いた行が、その地域で探している人の数の目安。最後の「${E(d.service)}」だけの行は全国の参考値。</p></section>
+    ${region}
+    ${d.suggest.length?`<section><h2>Google で実際に出る検索候補</h2><div class="chips">${d.suggest.map(s=>`<span>${E(s)}</span>`).join('')}</div><p class="note">検索窓に打った時に Google が出す候補。「実際にこう探されています」の根拠に使える。</p></section>`:''}`;
+}
+function copyLink(){const u=new URL(location.href);u.search=new URLSearchParams(Object.fromEntries(new FormData(f))).toString();navigator.clipboard?.writeText(u.toString());st.textContent='リンクをコピーしました'}
+f.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const b=Object.fromEntries(new FormData(f));
+  if(!b.service.trim()){st.className='err';st.textContent='サービス名を入れてください';return}
+  go.disabled=true;st.className='';st.textContent='調べています…';const t0=Date.now();
+  try{
+    const r=await fetch('/api/lookup?'+new URLSearchParams(b));
+    if(!r.ok)throw new Error((await r.json()).detail||'取得できませんでした');
+    render(await r.json());st.textContent=`${Math.round((Date.now()-t0)/100)/10}秒`;
+    history.replaceState(null,'','?'+new URLSearchParams(b));
+  }catch(err){st.className='err';st.textContent=err.message}
+  go.disabled=false;
+});
+if(f.elements.service.value)f.requestSubmit();
+</script>
+</body>
+</html>
