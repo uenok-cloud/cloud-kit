@@ -1,6 +1,6 @@
 <title>CloseOps</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="AI・IT企業専用のクロージング営業チーム。月額＋成果報酬で、商談の最後を引き受けます。">
+<meta name="description" content="AI・IT企業専用の営業責任者チーム。月額＋成果報酬で、商談を契約まで売り切ります。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
@@ -97,6 +97,7 @@ section.record{position:relative;overflow:hidden;border:0;border-radius:22px;bac
 .figs b{font-family:var(--mono);font-weight:600;font-size:clamp(2.2rem,5vw,3.4rem);line-height:1.1;font-variant-numeric:tabular-nums}
 .figs b small{font-family:var(--body);font-size:.9rem;font-weight:500;margin-left:.2rem}
 .figs .hot b{color:var(--seal)}
+.figs .fine{font-size:.72rem;opacity:.8}
 .stack{margin-top:var(--s4)}
 .stack-bar{display:flex;height:18px;border-radius:9px;overflow:hidden;background:color-mix(in srgb,var(--band-fg) 10%,transparent)}
 .stack-bar .paid{flex:150;background:var(--seal)}
@@ -235,7 +236,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--s4);font-size:.8rem;
         <a class="btn ghost" href="#sim">費用を試算する</a>
       </div>
       <div class="stat-row">
-        <div class="stat"><b>30–40%</b><span>クロージング成約率</span></div>
+        <div class="stat"><b>30–40%</b><span>成約率（リードの種類で変動）</span></div>
         <div class="stat"><b>月5万円〜</b><span>月額固定費</span></div>
         <div class="stat"><b>150万円</b><span>1週間で着金（一騎当千）</span></div>
       </div>
@@ -247,7 +248,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--s4);font-size:.8rem;
       <div class="stage us"><span>初回商談</span><span class="bar"><i style="--w:72%"></i></span><span class="n">CO</span></div>
       <div class="stage us"><span>提案・デモ</span><span class="bar"><i style="--w:54%"></i></span><span class="n">CO</span></div>
       <div class="stage us"><span>見積・交渉</span><span class="bar"><i style="--w:44%"></i></span><span class="n">CO</span></div>
-      <div class="stage us"><span>クロージング</span><span class="bar"><i style="--w:38%"></i></span><span class="n">CO</span></div>
+      <div class="stage us"><span>契約締結</span><span class="bar"><i style="--w:38%"></i></span><span class="n">CO</span></div>
       <p class="handoff">リードを受け取った時点から CloseOps が担当します</p>
       <div class="hanko" aria-hidden="true"><div>成約<small>CLOSED</small></div></div>
     </div>
@@ -260,17 +261,17 @@ footer{border-top:1px solid var(--line);padding-block:var(--s4);font-size:.8rem;
       <div>
         <div class="case-tag"><span>CASE 01</span><span>一騎当千</span><span>無限開拓株式会社</span></div>
         <h2 id="record-h">取ってきたリードを、<br><em>1週間で150万円</em>の着金に。</h2>
-        <p class="lead">営業支援サービス「一騎当千」の自社案件。AIで作ったLP、ChatGPT検索、SNS広告から入ってきた問い合わせを、CloseOps のクロージング担当が初回商談から引き受けました。</p>
+        <p class="lead">営業支援サービス「一騎当千」の自社案件。AIで作ったLP、ChatGPT検索、SNS広告から入ってきた問い合わせを、CloseOps の営業責任者が初回商談から契約まで引き受けました。</p>
         <div class="figs">
           <div class="hot"><span>1週間で着金</span><b>150<small>万円</small></b></div>
           <div><span>成約見込み</span><b>100<small>万円</small></b></div>
-          <div><span>クロージング成約率</span><b>30–40<small>%</small></b></div>
+          <div><span>成約率<br><small class="fine">リードの種類によって変わります</small></span><b>30–40<small>%</small></b></div>
         </div>
         <ol class="log" aria-label="一騎当千の商談の流れ">
           <li><time>流入</time><span>LP・ChatGPT検索・SNS広告から問い合わせ</span><em>集客</em></li>
           <li><time>商談</time><span>営業責任者が初回ヒアリングから担当</span><em class="us">CloseOps</em></li>
           <li><time>着金</time><span>1週間で <b>150万円</b> が入金</span><em class="us">CloseOps</em></li>
-          <li><time>見込み</time><span>さらに <b>100万円</b> がクロージング中</span><em class="us">CloseOps</em></li>
+          <li><time>見込み</time><span>さらに <b>100万円</b> が契約の詰めに入っています</span><em class="us">CloseOps</em></li>
         </ol>
         <div class="stack" aria-label="着金150万円、見込み100万円、合計250万円">
           <div class="stack-bar"><span class="paid"></span><span class="pipe2"></span></div>
@@ -353,7 +354,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--s4);font-size:.8rem;
         <div class="field">
           <label for="win">成約率 <output id="win-o" for="win">35%</output></label>
           <input id="win" type="range" min="30" max="40" step="1" value="35">
-          <small>CloseOps の実績レンジ 30〜40% で試算します</small>
+          <small>実績は30〜40%。成約率はリードの種類（問い合わせ・紹介・広告・リスト営業など）によって変わります</small>
         </div>
         <div class="field">
           <label id="mode-l">報酬率</label>
@@ -402,7 +403,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--s4);font-size:.8rem;
 </main>
 
 <footer class="wrap">
-  <span>CloseOps — AI・IT企業専用クロージングチーム</span>
+  <span>CloseOps — AI・IT企業専用 営業責任者チーム</span>
   <span>© 2026 CloseOps</span>
 </footer>
 
