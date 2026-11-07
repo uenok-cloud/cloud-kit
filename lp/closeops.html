@@ -1,4 +1,4 @@
-<title>CloseOps</title>
+<title>成約職人</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="AI・IT企業専用のクロージングチーム。営業責任者として商談に入り、契約締結、初回着金まで追いかけます。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,8 +52,9 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:col
 /* hero */
 .hero{display:grid;grid-template-columns:1.25fr 1fr;gap:var(--s5);align-items:center;padding-block:var(--s5) var(--s6)}
 .hero > *{min-width:0}
-.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(2.1rem,5.4vw,3.9rem);letter-spacing:-.01em;margin-top:var(--s2)}
+.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(1.9rem,4.4vw,3.3rem);letter-spacing:-.01em;margin-top:var(--s2)}
 .hero h1 em{font-style:normal;color:var(--seal)}
+.hero h1 span,.hero h1 em{display:inline-block}
 .hero .lead{font-size:1.05rem}
 .hero .chase{color:var(--ink);background:linear-gradient(transparent 62%,var(--seal-soft) 62%)}
 .cta-row{display:flex;flex-wrap:wrap;gap:var(--s1);margin-top:var(--s4)}
@@ -72,7 +73,7 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:col
 .stage.us .bar > i{background:var(--seal)}
 .stage .n{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
 .stage.us .n{color:var(--seal)}
-.handoff{margin-top:var(--s2);font-size:.78rem;color:var(--muted);display:flex;gap:.5rem;align-items:center}
+.handoff{margin-top:var(--s2);padding-right:84px;font-size:.78rem;color:var(--muted);display:flex;gap:.5rem;align-items:center}
 .handoff::before{content:"";width:1.6rem;height:2px;background:var(--seal)}
 .hanko{position:absolute;right:-14px;bottom:-22px;width:92px;height:92px;border:3px solid var(--seal);border-radius:50%;display:grid;place-items:center;color:var(--seal);font-family:var(--display);font-size:1.35rem;line-height:1;transform:rotate(-14deg);background:color-mix(in srgb,var(--surface) 70%,transparent);animation:stamp .5s 1s cubic-bezier(.2,1.6,.4,1) both}
 .hanko small{display:block;font-family:var(--mono);font-size:.5rem;letter-spacing:.1em;text-align:center;margin-top:.2rem}
@@ -214,7 +215,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--s4);font-size:.8rem;
 
 <header>
   <nav class="nav" aria-label="メイン">
-    <a class="logo" href="#top"><i>成</i>CloseOps</a>
+    <a class="logo" href="#top"><i>職</i>成約職人</a>
     <ul>
       <li><a href="#record">事例</a></li>
       <li><a href="#problem">課題</a></li>
@@ -230,8 +231,8 @@ footer{border-top:1px solid var(--line);padding-block:var(--s4);font-size:.8rem;
   <div class="hero">
     <div>
       <p class="eyebrow">AI・IT企業専用 / クロージングチーム</p>
-      <h1>プロダクトは強い。<br>足りないのは<em>クローザー</em>だ。</h1>
-      <p class="lead">CloseOps は、AI・IT企業のためのクロージングチームです。リードは御社が取ってくる。そこから先は、私たちが営業責任者として商談を回し、<strong class="chase">契約締結、初回着金まで追いかけます。</strong></p>
+      <h1><span>AIの仕組みは</span><span>あるけど、</span><br><em>営業の仕組み</em><span>つくりませんか？</span></h1>
+      <p class="lead">成約職人は、AI・IT企業のためのクロージングチームです。リードは御社が取ってくる。そこから先は、私たちが営業責任者として商談を回し、<strong class="chase">契約締結、初回着金まで追いかけます。</strong></p>
       <div class="cta-row">
         <a class="btn seal" href="#contact">商談を任せてみる</a>
         <a class="btn ghost" href="#sim">費用を試算する</a>
@@ -246,12 +247,12 @@ footer{border-top:1px solid var(--line);padding-block:var(--s4);font-size:.8rem;
     <div class="pipe" aria-label="商談パイプラインの例">
       <div class="pipe-head"><span>PIPELINE</span><span>担当</span></div>
       <div class="stage"><span>リード</span><span class="bar"><i style="--w:100%"></i></span><span class="n">御社</span></div>
-      <div class="stage us"><span>初回商談</span><span class="bar"><i style="--w:72%"></i></span><span class="n">CO</span></div>
-      <div class="stage us"><span>提案・デモ</span><span class="bar"><i style="--w:54%"></i></span><span class="n">CO</span></div>
-      <div class="stage us"><span>見積・交渉</span><span class="bar"><i style="--w:44%"></i></span><span class="n">CO</span></div>
-      <div class="stage us"><span>契約締結</span><span class="bar"><i style="--w:38%"></i></span><span class="n">CO</span></div>
-      <div class="stage us"><span>初回着金</span><span class="bar"><i style="--w:36%"></i></span><span class="n">CO</span></div>
-      <p class="handoff">リードを受け取ってから初回着金まで CloseOps が追いかけます</p>
+      <div class="stage us"><span>初回商談</span><span class="bar"><i style="--w:72%"></i></span><span class="n">職人</span></div>
+      <div class="stage us"><span>提案・デモ</span><span class="bar"><i style="--w:54%"></i></span><span class="n">職人</span></div>
+      <div class="stage us"><span>見積・交渉</span><span class="bar"><i style="--w:44%"></i></span><span class="n">職人</span></div>
+      <div class="stage us"><span>契約締結</span><span class="bar"><i style="--w:38%"></i></span><span class="n">職人</span></div>
+      <div class="stage us"><span>初回着金</span><span class="bar"><i style="--w:36%"></i></span><span class="n">職人</span></div>
+      <p class="handoff">リードを受け取ってから初回着金まで成約職人が追いかけます</p>
       <div class="hanko" aria-hidden="true"><div>成約<small>CLOSED</small></div></div>
     </div>
   </div>
@@ -263,7 +264,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--s4);font-size:.8rem;
       <div>
         <div class="case-tag"><span>CASE 01</span><span>一騎当千</span><span>無限開拓株式会社</span></div>
         <h2 id="record-h">取ってきたリードを、<br><em>1週間で150万円</em>の着金に。</h2>
-        <p class="lead">営業支援サービス「一騎当千」の自社案件。AIで作ったLP、ChatGPT検索、SNS広告から入ってきた問い合わせを、CloseOps の営業責任者が初回商談から契約まで引き受けました。</p>
+        <p class="lead">営業支援サービス「一騎当千」の自社案件。AIで作ったLP、ChatGPT検索、SNS広告から入ってきた問い合わせを、成約職人の営業責任者が初回商談から契約まで引き受けました。</p>
         <div class="figs">
           <div class="hot"><span>1週間で着金</span><b>150<small>万円</small></b></div>
           <div><span>成約見込み</span><b>100<small>万円</small></b></div>
@@ -271,9 +272,9 @@ footer{border-top:1px solid var(--line);padding-block:var(--s4);font-size:.8rem;
         </div>
         <ol class="log" aria-label="一騎当千の商談の流れ">
           <li><time>流入</time><span>LP・ChatGPT検索・SNS広告から問い合わせ</span><em>集客</em></li>
-          <li><time>商談</time><span>営業責任者が初回ヒアリングから担当</span><em class="us">CloseOps</em></li>
-          <li><time>着金</time><span>1週間で <b>150万円</b> が入金</span><em class="us">CloseOps</em></li>
-          <li><time>見込み</time><span>さらに <b>100万円</b> が契約の詰めに入っています</span><em class="us">CloseOps</em></li>
+          <li><time>商談</time><span>営業責任者が初回ヒアリングから担当</span><em class="us">成約職人</em></li>
+          <li><time>着金</time><span>1週間で <b>150万円</b> が入金</span><em class="us">成約職人</em></li>
+          <li><time>見込み</time><span>さらに <b>100万円</b> が契約の詰めに入っています</span><em class="us">成約職人</em></li>
         </ol>
         <div class="stack" aria-label="着金150万円、見込み100万円、合計250万円">
           <div class="stack-bar"><span class="paid"></span><span class="pipe2"></span></div>
@@ -298,12 +299,12 @@ footer{border-top:1px solid var(--line);padding-block:var(--s4);font-size:.8rem;
   <section id="flow">
     <p class="eyebrow">How it works</p>
     <h2>リードを渡すだけで、営業責任者が入る。</h2>
-    <p class="lead">CloseOps はリード獲得（テレアポ・広告・リスト作成）は行いません。御社が取ってきたリードを、営業責任者として成約まで持っていくことに集中します。</p>
+    <p class="lead">成約職人はリード獲得（テレアポ・広告・リスト作成）は行いません。御社が取ってきたリードを、営業責任者として成約まで持っていくことに集中します。</p>
     <ol class="flow">
-      <li><h3>キックオフ</h3><p>製品・価格表・過去の失注理由を共有いただき、提案の型を一緒に作ります。</p><span class="who">御社 + CO</span></li>
+      <li><h3>キックオフ</h3><p>製品・価格表・過去の失注理由を共有いただき、提案の型を一緒に作ります。</p><span class="who">御社 + 職人</span></li>
       <li><h3>リードの引き渡し</h3><p>御社で獲得したリードを、問い合わせ内容とあわせて渡していただきます。</p><span class="who">御社</span></li>
-      <li><h3>営業責任者として商談</h3><p>初回ヒアリング、提案、見積、条件交渉、稟議の後押しまで担当します。技術的な深掘りが必要なときだけ同席をお願いします。</p><span class="who us">CloseOps</span></li>
-      <li><h3>契約締結・初回着金</h3><p>契約を結んで終わりにせず、初回の入金まで追いかけます。成果報酬は初年度分の受注金額に対してかかり、成約がなければ発生しません。</p><span class="who us">CloseOps</span></li>
+      <li><h3>営業責任者として商談</h3><p>初回ヒアリング、提案、見積、条件交渉、稟議の後押しまで担当します。技術的な深掘りが必要なときだけ同席をお願いします。</p><span class="who us">成約職人</span></li>
+      <li><h3>契約締結・初回着金</h3><p>契約を結んで終わりにせず、初回の入金まで追いかけます。成果報酬は初年度分の受注金額に対してかかり、成約がなければ発生しません。</p><span class="who us">成約職人</span></li>
     </ol>
   </section>
 
@@ -337,7 +338,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--s4);font-size:.8rem;
         <p class="fit">月の受注額 <b>300万円以上</b> なら最安</p>
       </article>
     </div>
-    <p class="note">※ 金額は税別。成果報酬は CloseOps が担当した商談の<b>初年度分の受注金額のみ</b>にかかります。2年目以降の更新・継続課金には成果報酬はかかりません。</p>
+    <p class="note">※ 金額は税別。成果報酬は成約職人が担当した商談の<b>初年度分の受注金額のみ</b>にかかります。2年目以降の更新・継続課金には成果報酬はかかりません。</p>
   </section>
 
   <section id="sim">
@@ -405,8 +406,8 @@ footer{border-top:1px solid var(--line);padding-block:var(--s4);font-size:.8rem;
 </main>
 
 <footer class="wrap">
-  <span>CloseOps — AI・IT企業専用 クロージングチーム</span>
-  <span>© 2026 CloseOps</span>
+  <span>成約職人 — AI・IT企業専用 クロージングチーム</span>
+  <span>© 2026 成約職人</span>
 </footer>
 
 <script>
