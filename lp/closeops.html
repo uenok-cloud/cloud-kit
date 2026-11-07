@@ -8,8 +8,8 @@
 /* Layout: 温かい紙色の地に、商談が進むほどコーラル(進行中)→グリーン(成約・着金)へ変わる。中央はスクロール連動のディールUI */
 :root{
   --bg:#FAF9F5; --bg2:#F0EEE6; --surface:#FFFFFF; --ink:#141413; --muted:#6B6A63; --line:#E5E2D8;
-  --coral:#D97757; --coral-ink:#B9573A; --coral-soft:#F7E6DD;
-  --green:#10A37F; --green-ink:#0B7F63; --green-soft:#DFF3EC;
+  --coral:#D97757; --coral-ink:#A34A2F; --coral-soft:#F7E6DD; --coral-btn:#B4532F; --on-coral:#FFFFFF; --green-btn:#0A7A5F; --on-green:#FFFFFF;
+  --green:#10A37F; --green-ink:#08705A; --green-soft:#DFF3EC;
   --band:#141413; --band-fg:#F0EEE6; --band-muted:#A3A097; --band-line:#33322E;
   --shadow:0 1px 2px rgba(20,20,19,.06),0 12px 32px -12px rgba(20,20,19,.18);
   --serif:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho",serif;
@@ -19,12 +19,12 @@
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#1F1E1D; --bg2:#262624; --surface:#2A2927; --ink:#F0EEE6; --muted:#A3A097; --line:#3A3935;
-  --coral:#E08A6A; --coral-ink:#EC9B7C; --coral-soft:#3D2A22; --green:#19C37D; --green-ink:#3FD69A; --green-soft:#173328;
+  --coral:#E08A6A; --coral-ink:#F0A586; --coral-soft:#3D2A22; --coral-btn:#E08A6A; --on-coral:#1A1918; --green-btn:#19C37D; --on-green:#0E1F18; --green:#19C37D; --green-ink:#3FD69A; --green-soft:#173328;
   --band:#121211; --band-fg:#F0EEE6; --band-muted:#9C998F; --band-line:#2E2D2A;
   --shadow:0 1px 2px rgba(0,0,0,.3),0 16px 40px -12px rgba(0,0,0,.6); color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#1F1E1D; --bg2:#262624; --surface:#2A2927; --ink:#F0EEE6; --muted:#A3A097; --line:#3A3935;
-  --coral:#E08A6A; --coral-ink:#EC9B7C; --coral-soft:#3D2A22; --green:#19C37D; --green-ink:#3FD69A; --green-soft:#173328;
+  --coral:#E08A6A; --coral-ink:#F0A586; --coral-soft:#3D2A22; --coral-btn:#E08A6A; --on-coral:#1A1918; --green-btn:#19C37D; --on-green:#0E1F18; --green:#19C37D; --green-ink:#3FD69A; --green-soft:#173328;
   --band:#121211; --band-fg:#F0EEE6; --band-muted:#9C998F; --band-line:#2E2D2A;
   --shadow:0 1px 2px rgba(0,0,0,.3),0 16px 40px -12px rgba(0,0,0,.6); color-scheme:dark}
 
@@ -43,11 +43,12 @@ a{color:inherit}
 .sec{padding-block:6rem}
 .sec-h{font-family:var(--serif);font-weight:800;font-size:clamp(1.7rem,3.6vw,2.6rem);margin-top:.6rem}
 .sec-h em{font-style:normal;color:var(--coral-ink)}
+.nb{display:inline-block}
 .sec-lead{color:var(--muted);max-width:40em;margin-top:1rem}
 .btn{display:inline-flex;align-items:center;gap:.5rem;border-radius:999px;padding:.8rem 1.4rem;font:700 .95rem var(--sans);text-decoration:none;cursor:pointer;border:1px solid transparent;transition:transform .15s,background .15s}
 .btn:hover{transform:translateY(-1px)}
 .btn.dark{background:var(--ink);color:var(--bg)}
-.btn.coral{background:var(--coral);color:#fff}
+.btn.coral{background:var(--coral-btn);color:var(--on-coral)}
 .btn.line{border-color:var(--line);color:var(--ink);background:var(--surface)}
 .btn .arr{transition:transform .2s}
 .btn:hover .arr{transform:translateX(3px)}
@@ -113,8 +114,10 @@ a{color:inherit}
 .run{display:grid;grid-template-columns:1fr 1.15fr;gap:4rem;margin-top:3rem;position:relative}
 .run > *{min-width:0}
 .steps{display:grid}
-.step{min-height:78vh;display:flex;flex-direction:column;justify-content:center;gap:.7rem;opacity:.35;transition:opacity .4s}
-.step.on{opacity:1}
+.step{min-height:78vh;display:flex;flex-direction:column;justify-content:center;gap:.7rem}
+.step h3{color:var(--muted);transition:color .3s}
+.step.on h3{color:var(--ink)}
+.step.on .no{color:var(--coral-ink)}
 .step .no{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;color:var(--muted)}
 .step h3{font-family:var(--serif);font-weight:800;font-size:clamp(1.4rem,2.6vw,1.9rem)}
 .step p{color:var(--muted);max-width:30em}
@@ -135,9 +138,9 @@ a{color:inherit}
 .chips{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
 .chips span{font-size:.62rem;text-align:center;padding:.2rem 0;border-radius:6px;background:var(--bg2);color:var(--muted);white-space:nowrap;overflow:hidden;transition:background .3s,color .3s}
 .chips span.past{background:var(--coral-soft);color:var(--coral-ink)}
-.chips span.cur{background:var(--coral);color:#fff;font-weight:700}
+.chips span.cur{background:var(--coral-btn);color:var(--on-coral);font-weight:700}
 .panel.done .chips span{background:var(--green-soft);color:var(--green-ink)}
-.panel.done .chips span.cur{background:var(--green);color:#fff}
+.panel.done .chips span.cur{background:var(--green-btn);color:var(--on-green)}
 .screens{position:relative;flex:1;min-height:0}
 .scr{position:absolute;inset:0;padding:1.3rem;display:flex;flex-direction:column;gap:.8rem;opacity:0;transform:translateY(16px);transition:opacity .45s,transform .45s;pointer-events:none;overflow:hidden}
 .scr.on{opacity:1;transform:none;pointer-events:auto}
@@ -204,7 +207,7 @@ a{color:inherit}
 .sig small{font-size:.7rem;color:var(--muted)}
 /* s7 paid */
 .paid{flex:1;display:grid;place-content:center;text-align:center;gap:.6rem;background:radial-gradient(circle at 50% 40%,var(--green-soft),transparent 70%);border-radius:16px}
-.paid .ok{width:56px;height:56px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;margin-inline:auto;font-size:1.6rem;transform:scale(0);transition:transform .5s cubic-bezier(.2,1.6,.4,1) .1s}
+.paid .ok{width:56px;height:56px;border-radius:50%;background:var(--green-btn);color:var(--on-green);display:grid;place-items:center;margin-inline:auto;font-size:1.6rem;transform:scale(0);transition:transform .5s cubic-bezier(.2,1.6,.4,1) .1s}
 .on .paid .ok{transform:none}
 .paid .amt{font-family:var(--mono);font-weight:600;font-size:clamp(2rem,5vw,2.8rem);font-variant-numeric:tabular-nums;color:var(--green-ink)}
 .paid p{font-size:.85rem;color:var(--muted)}
@@ -217,12 +220,18 @@ a{color:inherit}
   .chips span{font-size:.55rem}
 }
 
+/* 問いかけ */
+.ask{margin:0 0 5rem;padding:2.6rem clamp(1.2rem,4vw,3rem);background:var(--surface);border:1px solid var(--line);border-radius:24px;position:relative;display:grid;gap:1.2rem}
+.ask::before{content:"“";position:absolute;top:-.35em;left:.35em;font-family:var(--serif);font-size:7rem;line-height:1;color:var(--coral)}
+.ask p{font-family:var(--serif);font-weight:800;font-size:clamp(1.25rem,2.6vw,1.85rem);line-height:1.6;text-wrap:pretty}
+.ask p + p{color:var(--muted);font-size:clamp(1.05rem,2.1vw,1.4rem)}
+.ask em{font-style:normal;color:var(--coral-ink);background:linear-gradient(transparent 70%,var(--coral-soft) 70%)}
 /* objection chat */
 .obj{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3rem}
 .obj > *{min-width:0}
 .thread{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:1.2rem;display:grid;gap:.6rem;align-content:start}
 .thread .msg{max-width:92%}
-.thread .msg.us{background:var(--coral);color:#fff}
+.thread .msg.us{background:var(--coral-btn);color:var(--on-coral)}
 @media (max-width:900px){.obj{grid-template-columns:1fr}}
 
 /* scope */
@@ -237,15 +246,42 @@ a{color:inherit}
 .scope .no li::before{content:"—";margin-right:.6rem}
 @media (max-width:760px){.scope{grid-template-columns:1fr}}
 
+/* story */
+.story{display:grid;grid-template-columns:1.1fr 1fr;gap:4rem;margin-top:2.5rem;align-items:start}
+.story > *{min-width:0}
+.story-text{display:grid;gap:1.1rem;font-size:1.05rem;line-height:2}
+.story-text p:nth-child(2){font-family:var(--serif);font-weight:800;font-size:clamp(1.5rem,3vw,2.1rem);line-height:1.5;color:var(--coral-ink)}
+.story-fact{padding:1rem 1.2rem;border-radius:14px;background:var(--green-soft);font-size:.98rem}
+.story-fact b{color:var(--green-ink)}
+.story-sign{font-size:.85rem;color:var(--muted)}
+.loop{list-style:none;margin:0;padding:0;display:grid;gap:.6rem;position:relative}
+.loop li{display:grid;grid-template-columns:2.4rem 1fr;column-gap:1rem;align-items:center;padding:1rem 1.1rem;border:1px solid var(--line);border-radius:16px;background:var(--surface);transition:border-color .4s,box-shadow .4s,transform .4s}
+.loop li b{font-size:1rem}
+.loop li small{grid-column:2;font-size:.8rem;color:var(--muted)}
+.loop-n{grid-row:span 2;width:2.4rem;height:2.4rem;border-radius:50%;display:grid;place-items:center;font-family:var(--mono);font-weight:600;background:var(--bg2);color:var(--muted);transition:background .4s,color .4s}
+.loop li.on{border-color:var(--coral);box-shadow:var(--shadow);transform:translateX(6px)}
+.loop li.on .loop-n{background:var(--coral-btn);color:var(--on-coral)}
+.loop::after{content:"↺ 1に戻って、くり返す";display:block;text-align:right;font-size:.8rem;color:var(--muted);padding-top:.2rem}
+@media (max-width:900px){.story{grid-template-columns:1fr;gap:2.5rem}}
+
+/* 月額でやること */
+.monthly{margin-top:.6rem;padding:1.4rem 1.4rem 1.2rem;border-radius:18px;border:1px solid var(--line);background:var(--surface)}
+.monthly h3{font-size:1rem}
+.monthly ul{list-style:none;margin:.9rem 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.monthly li{display:grid;gap:.3rem;padding-top:.8rem;border-top:2px solid var(--coral);min-width:0}
+.monthly li span{font-size:.85rem;color:var(--muted)}
+.monthly > p{margin-top:1rem;font-size:.85rem;color:var(--green-ink)}
+@media (max-width:760px){.monthly ul{grid-template-columns:1fr}}
+
 /* case band */
 .case{background:var(--band);color:var(--band-fg);border-radius:28px;padding:4rem clamp(1.2rem,4vw,3.5rem);position:relative;overflow:hidden}
 .case .eyebrow{color:var(--band-muted)}
 .case-tag{display:inline-flex;flex-wrap:wrap;border:1px solid var(--band-line);border-radius:999px;overflow:hidden;font-size:.75rem}
 .case-tag span{padding:.3rem .9rem}
-.case-tag span:first-child{background:var(--coral);color:#fff;font-family:var(--mono);font-weight:600;letter-spacing:.1em}
+.case-tag span:first-child{background:var(--coral-btn);color:var(--on-coral);font-family:var(--mono);font-weight:600;letter-spacing:.1em}
 .case-tag span + span{border-left:1px solid var(--band-line);color:var(--band-muted)}
 .case-tag span:nth-child(2){color:var(--band-fg);font-weight:700;letter-spacing:.15em}
-.case h2{font-family:var(--serif);font-weight:800;font-size:clamp(1.8rem,4.2vw,3rem);margin-top:1.4rem}
+.case h2{font-family:var(--serif);font-weight:800;font-size:clamp(1.45rem,6.4vw,3rem);margin-top:1.4rem}
 .case h2 em{font-style:normal;color:var(--green)}
 .case .sec-lead{color:var(--band-muted)}
 .case-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:3rem;margin-top:3rem;align-items:start}
@@ -302,6 +338,15 @@ a{color:inherit}
 .plan ul{margin:0;padding-left:1.1em;font-size:.88rem;color:var(--muted)}
 .fit{font-size:.84rem;margin-top:auto;padding:.6rem .8rem;border-radius:10px;background:var(--bg2)}
 .note{font-size:.8rem;color:var(--muted);margin-top:1.2rem}
+.term{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem;margin-top:.6rem;padding:.9rem 1.2rem;border-radius:14px;border:1px solid var(--line);background:var(--surface);font-size:.9rem}
+.term-k{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;padding:.1rem .6rem;border:1px solid var(--line);border-radius:999px}
+.faq{margin-top:2.5rem;display:grid;gap:.6rem}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:0 1.2rem}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:1rem;padding-block:1rem;font-weight:700}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--mono);color:var(--coral-ink);transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{color:var(--muted);padding-bottom:1rem;font-size:.92rem}
 @media (max-width:900px){.plans{grid-template-columns:1fr}}
 
 /* simulator */
@@ -327,7 +372,7 @@ th{font-weight:500;color:var(--muted);font-size:.76rem}
 td{font-family:var(--mono)}
 td:first-child{font-family:var(--sans);font-weight:700}
 tr.best td{color:var(--green-ink)}
-tr.best td:first-child::after{content:"最安";font-size:.66rem;margin-left:.5rem;padding:.05rem .5rem;border-radius:999px;background:var(--green);color:#fff;font-weight:500}
+tr.best td:first-child::after{content:"最安";font-size:.66rem;margin-left:.5rem;padding:.05rem .5rem;border-radius:999px;background:var(--green-btn);color:var(--on-green);font-weight:500}
 .verdict{margin-top:1rem;font-size:.9rem}
 @media (max-width:900px){.sim{grid-template-columns:1fr}}
 
@@ -354,6 +399,7 @@ footer{border-top:1px solid var(--line);padding-block:2.5rem;font-size:.8rem;col
     <a class="logo" href="#top"><span class="mark"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="#D97757" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>成約職人</a>
     <ul>
       <li><a href="#run">商談の進み方</a></li>
+      <li><a href="#story">代表より</a></li>
       <li><a href="#case">事例</a></li>
       <li><a href="#pricing">料金</a></li>
       <li><a href="#sim">シミュレーション</a></li>
@@ -365,7 +411,7 @@ footer{border-top:1px solid var(--line);padding-block:2.5rem;font-size:.8rem;col
 <main class="wrap" id="top">
   <div class="hero">
     <div>
-      <span class="pill"><b>NEW</b>AI・IT企業専用 クロージングチーム</span>
+      <span class="pill"><b>新サービス</b>AI・IT企業専用 クロージングチーム</span>
       <h1 id="hero-h"><span>AIの仕組みは</span><span>あるけど、</span><br><em>営業の仕組み</em><span>つくりませんか？</span></h1>
       <p class="lead"><span id="hero-lead">成約職人は、AI・IT企業のためのクロージングチームです。リードは御社が取ってくる。そこから先は、私たちが営業責任者として商談を回し、</span><strong>契約締結、初回着金まで追いかけます。</strong></p>
       <div class="cta-row">
@@ -375,11 +421,11 @@ footer{border-top:1px solid var(--line);padding-block:2.5rem;font-size:.8rem;col
       <div class="kpis">
         <div class="kpi"><b>30–40%</b><span>成約率（リードの種類で変動）</span></div>
         <div class="kpi g"><b>150万円</b><span>1週間で着金（一騎当千）</span></div>
-        <div class="kpi"><b>月5万円〜</b><span>月額固定費</span></div>
+        <div class="kpi"><b>月5万円〜</b><span>月額固定費（最低6か月）</span></div>
       </div>
     </div>
     <aside class="feed" aria-label="成約職人の商談の動き（イメージ）">
-      <div class="feed-h"><b>商談の動き</b><span class="live"><i></i>LIVE</span></div>
+      <div class="feed-h"><b>商談の動き</b><span class="live"><i></i>更新中</span></div>
       <ul id="feed"></ul>
       <div class="feed-f">表示はイメージです</div>
     </aside>
@@ -388,19 +434,19 @@ footer{border-top:1px solid var(--line);padding-block:2.5rem;font-size:.8rem;col
 
   <section class="sec" id="run" aria-labelledby="run-h">
     <div class="run-head">
-      <p class="eyebrow">Deal run · 1件の商談を最後まで</p>
-      <h2 class="sec-h" id="run-h">スクロールするほど、<br><em>商談が前に進む。</em></h2>
+      <p class="eyebrow">1件の商談を、最後まで</p>
+      <h2 class="sec-h" id="run-h"><span class="nb">スクロールするほど、</span><br><em class="nb">商談が前に進む。</em></h2>
       <p class="sec-lead">御社がリードを渡したあと、成約職人が何をするのか。サンプルの商談1件で、初回着金までを順に見せます。</p>
     </div>
     <div class="run">
       <div class="steps" id="steps">
-        <article class="step on"><span class="no">STEP 01 / 07</span><h3>リードを受け取る</h3><p>御社が獲得したリードを、問い合わせ内容とあわせて受け取ります。リード獲得はしません。受け取った瞬間から担当につきます。</p><div class="who"><span>御社：リードを渡す</span><span class="us">成約職人：担当につく</span></div></article>
-        <article class="step"><span class="no">STEP 02 / 07</span><h3>初回ヒアリング</h3><p>課題・予算・決裁者・導入時期。初回で聞くべきことを全部聞き、その場で次回の日程まで決めます。</p><div class="who"><span class="us">成約職人</span></div></article>
-        <article class="step"><span class="no">STEP 03 / 07</span><h3>提案・デモ</h3><p>機能の説明ではなく、決裁者が判断できる数字に置き換えて提案します。技術の深掘りが必要なときだけ同席をお願いします。</p><div class="who"><span class="us">成約職人</span><span>御社：必要なときだけ同席</span></div></article>
-        <article class="step"><span class="no">STEP 04 / 07</span><h3>見積・条件交渉</h3><p>価格を出すタイミングを逃さず、値引きではなく条件で合意をつくります。</p><div class="who"><span class="us">成約職人</span></div></article>
-        <article class="step"><span class="no">STEP 05 / 07</span><h3>稟議の後押し</h3><p>担当者が社内で通しやすいように、稟議用の資料と想定問答まで用意します。</p><div class="who"><span class="us">成約職人</span></div></article>
-        <article class="step"><span class="no">STEP 06 / 07</span><h3>契約締結</h3><p>契約書の取り交わしまで並走します。ここで手を離しません。</p><div class="who"><span class="us">成約職人</span></div></article>
-        <article class="step"><span class="no">STEP 07 / 07</span><h3>初回着金</h3><p>初回の入金を確認して、ようやく完了です。契約締結、初回着金まで追いかけます。</p><div class="who"><span class="pd">着金確認</span></div></article>
+        <article class="step on"><span class="no">ステップ 01 / 07</span><h3>リードを受け取る</h3><p>御社が獲得したリードを、問い合わせ内容とあわせて受け取ります。リード獲得はしません。受け取った瞬間から担当につきます。</p><div class="who"><span>御社：リードを渡す</span><span class="us">成約職人：担当につく</span></div></article>
+        <article class="step"><span class="no">ステップ 02 / 07</span><h3>初回ヒアリング</h3><p>課題・予算・決裁者・導入時期。初回で聞くべきことを全部聞き、その場で次回の日程まで決めます。</p><div class="who"><span class="us">成約職人</span></div></article>
+        <article class="step"><span class="no">ステップ 03 / 07</span><h3>提案・デモ</h3><p>機能の説明ではなく、決裁者が判断できる数字に置き換えて提案します。技術の深掘りが必要なときだけ同席をお願いします。</p><div class="who"><span class="us">成約職人</span><span>御社：必要なときだけ同席</span></div></article>
+        <article class="step"><span class="no">ステップ 04 / 07</span><h3>見積・条件交渉</h3><p>価格を出すタイミングを逃さず、値引きではなく条件で合意をつくります。</p><div class="who"><span class="us">成約職人</span></div></article>
+        <article class="step"><span class="no">ステップ 05 / 07</span><h3>稟議の後押し</h3><p>担当者が社内で通しやすいように、稟議用の資料と想定問答まで用意します。</p><div class="who"><span class="us">成約職人</span></div></article>
+        <article class="step"><span class="no">ステップ 06 / 07</span><h3>契約締結</h3><p>契約書の取り交わしまで並走します。ここで手を離しません。</p><div class="who"><span class="us">成約職人</span></div></article>
+        <article class="step"><span class="no">ステップ 07 / 07</span><h3>初回着金</h3><p>初回の入金を確認して、ようやく完了です。契約締結、初回着金まで追いかけます。</p><div class="who"><span class="pd">着金確認</span></div></article>
       </div>
 
       <div class="stage-wrap">
@@ -412,13 +458,13 @@ footer{border-top:1px solid var(--line);padding-block:2.5rem;font-size:.8rem;col
           </div>
           <div class="screens">
             <div class="scr on">
-              <span class="lbl">Inbox · 新規リード</span>
+              <span class="lbl">受信箱｜新規リード</span>
               <div class="card notif pop"><span class="ic c">新</span><div><h4>AI外観検査の導入費用を知りたい</h4><p>株式会社サンプル製作所／製造業・従業員320名／品質保証部 課長</p></div></div>
               <div class="card pop" style="--d:.15s"><div class="row"><span>流入元</span><b>Webフォーム</b></div><div class="row"><span>希望</span><b>概算見積・事例</b></div><div class="row"><span>受領</span><b>11/04 10:12</b></div></div>
               <div class="card assign pop" style="--d:.3s"><span>担当：成約職人（営業責任者）</span><span class="tg" aria-hidden="true"></span></div>
             </div>
             <div class="scr">
-              <span class="lbl">Meeting · 初回ヒアリング</span>
+              <span class="lbl">商談メモ｜初回ヒアリング</span>
               <div class="chat">
                 <div class="msg them pop"><small>サンプル製作所 課長</small>目視検査の人手が足りなくて。でも費用感が分からなくて…</div>
                 <div class="msg us pop" style="--d:.25s"><small>成約職人</small>今、検査に何人・何時間かかっていますか？ 決裁はどなたが？</div>
@@ -427,7 +473,7 @@ footer{border-top:1px solid var(--line);padding-block:2.5rem;font-size:.8rem;col
               <div class="checks"><span class="ck" style="--d:.7s">課題</span><span class="ck" style="--d:.85s">予算</span><span class="ck" style="--d:1s">決裁者</span><span class="ck" style="--d:1.15s">時期</span></div>
             </div>
             <div class="scr">
-              <span class="lbl">Proposal · 工場長向け提案</span>
+              <span class="lbl">提案書｜工場長向け</span>
               <div class="card roi">
                 <div class="roi-r"><span>現状の検査費</span><span class="tr"><i style="--w:100%"></i></span><b>1,200万円</b></div>
                 <div class="roi-r after"><span>導入後</span><span class="tr"><i style="--w:40%"></i></span><b>480万円</b></div>
@@ -436,7 +482,7 @@ footer{border-top:1px solid var(--line);padding-block:2.5rem;font-size:.8rem;col
               <div class="card pop" style="--d:.6s"><div class="row"><span>提案の軸</span><b>人件費削減と検査品質</b></div><div class="row"><span>次回</span><b>工場長同席で見積提示</b></div></div>
             </div>
             <div class="scr">
-              <span class="lbl">Quote · 見積</span>
+              <span class="lbl">見積書</span>
               <div class="card">
                 <div class="row pop"><span>AI外観検査 ライセンス（年額）</span><b>¥3,600,000</b></div>
                 <div class="row pop" style="--d:.15s"><span>初期導入・学習データ整備</span><b>¥1,500,000</b></div>
@@ -446,7 +492,7 @@ footer{border-top:1px solid var(--line);padding-block:2.5rem;font-size:.8rem;col
               <span class="status pop" style="--d:.6s">✓ 条件合意</span>
             </div>
             <div class="scr">
-              <span class="lbl">Approval · 稟議</span>
+              <span class="lbl">稟議の進み具合</span>
               <div class="flow">
                 <div class="ap pop"><span class="av">課</span><span>品質保証部 課長<small>稟議起票・資料添付</small></span><span class="st" style="--d:.3s"></span></div>
                 <div class="ap pop" style="--d:.15s"><span class="av">部</span><span>製造部 部長<small>想定問答で事前説明済み</small></span><span class="st" style="--d:.7s"></span></div>
@@ -454,7 +500,7 @@ footer{border-top:1px solid var(--line);padding-block:2.5rem;font-size:.8rem;col
               </div>
             </div>
             <div class="scr">
-              <span class="lbl">Contract · 契約</span>
+              <span class="lbl">契約書</span>
               <div class="doc pop">
                 <b>業務委託契約書</b>
                 <span class="ln" style="width:92%"></span><span class="ln" style="width:80%"></span><span class="ln" style="width:86%"></span><span class="ln" style="width:60%"></span>
@@ -462,7 +508,7 @@ footer{border-top:1px solid var(--line);padding-block:2.5rem;font-size:.8rem;col
               </div>
             </div>
             <div class="scr">
-              <span class="lbl">Payment · 入金</span>
+              <span class="lbl">入金の確認</span>
               <div class="paid">
                 <span class="ok">✓</span>
                 <span class="amt" id="amt">¥1,500,000</span>
@@ -477,24 +523,49 @@ footer{border-top:1px solid var(--line);padding-block:2.5rem;font-size:.8rem;col
   </section>
 
   <section class="sec" aria-labelledby="obj-h">
-    <p class="eyebrow">Why deals stall</p>
-    <h2 class="sec-h" id="obj-h">商談が止まる、<em>いつものひと言。</em></h2>
+    <p class="eyebrow">商談が止まる理由</p>
+    <blockquote class="ask">
+      <p>職人や天才のあるあるですが、<br>そのサービスを分かりすぎて、未来が見えすぎて、<em>言いすぎていませんか？</em></p>
+      <p>その商品、<em>売れるところで、しっかり売れるように</em>誘導できていないんじゃないですか？</p>
+    </blockquote>
+    <h2 class="sec-h" id="obj-h"><span class="nb">商談が止まる、</span><em class="nb">いつものひと言。</em></h2>
     <p class="sec-lead">作り手が営業を兼ねていると、良いデモのあとでこう言われて止まります。成約職人はこう返します。</p>
     <div class="obj">
       <div class="thread"><div class="msg them">すごいですね。社内で検討します。</div><div class="msg us">ありがとうございます。検討の場にはどなたが？ その方向けに費用対効果を1枚にまとめてお送りします。</div></div>
-      <div class="thread"><div class="msg them">で、結局おいくらですか？</div><div class="msg us">今の検査コストから逆算すると、この金額で8か月で回収できます。条件を詰めましょう。</div></div>
+      <div class="thread"><div class="msg them">で、結局おいくらですか？</div><div class="msg us">今の検査コストから逆算すると、この金額なら8か月で回収できます。条件を詰めましょう。</div></div>
       <div class="thread"><div class="msg them">来期の予算でまた相談させてください。</div><div class="msg us">来期から使うなら、稟議は今月が締めですね。資料はこちらで用意します。</div></div>
     </div>
     <div class="scope">
-      <div class="yes"><h3>成約職人がやること</h3><ul><li>リード受領後の初回商談から担当</li><li>提案・見積・条件交渉</li><li>稟議資料と想定問答の用意</li><li>契約締結、初回着金まで追いかける</li></ul></div>
+      <div class="yes"><h3>成約職人がやること</h3><ul><li>リード受領後の初回商談から担当</li><li>提案・見積・条件交渉</li><li>稟議資料と想定問答の用意</li><li>契約締結、初回着金まで追いかける</li><li>サービス設計の見直しと、売れる形への作り替え</li><li>最低6か月、営業責任者として並走</li></ul></div>
       <div class="no"><h3>やらないこと</h3><ul><li>リード獲得（テレアポ・広告・リスト作成）</li><li>技術の深掘り説明（必要なときだけ同席をお願いします）</li></ul></div>
+    </div>
+  </section>
+
+  <section class="sec" id="story" aria-labelledby="story-h">
+    <p class="eyebrow">代表より</p>
+    <h2 class="sec-h" id="story-h"><span class="nb">私たちも、</span><em><span class="nb">営業マンが</span><span class="nb">いなくて</span><span class="nb">困っていました。</span></em></h2>
+    <div class="story">
+      <div class="story-text">
+        <p>クロージングを任せられる人がいたら、自分はクリエイティブとプロダクトに集中できる。ストレスがなくなり、売上は勝手に上がっていき、良いサービスを作りまくれる。</p>
+        <p><span class="nb">このルーティンが、</span><span class="nb">最強すぎました。</span></p>
+        <p>噛み合いすぎて、新商品を2つ3つ出しても、それが売れるまでが簡単になる。こんなにいいことはありません。</p>
+        <p class="story-fact">自社でもサービス設計をガラッと変えてから、<b>1週間で150万円</b>を売ることができました。しかも、簡単に。</p>
+        <p class="story-sign">無限開拓株式会社 代表</p>
+      </div>
+      <ol class="loop" id="loop" aria-label="成約職人が入ったあとの好循環">
+        <li class="on"><span class="loop-n">1</span><b>クロージングを任せる</b><small>商談は成約職人へ</small></li>
+        <li><span class="loop-n">2</span><b>プロダクトに集中</b><small>クリエイティブと開発だけ</small></li>
+        <li><span class="loop-n">3</span><b>ストレスが消える</b><small>営業を兼ねなくていい</small></li>
+        <li><span class="loop-n">4</span><b>売上が勝手に上がる</b><small>リードが着金に変わる</small></li>
+        <li><span class="loop-n">5</span><b>新商品を2つ3つ</b><small>出したものがまた売れる</small></li>
+      </ol>
     </div>
   </section>
 
   <section class="sec" id="case" aria-labelledby="case-h">
     <div class="case">
-      <div class="case-tag"><span>CASE 01</span><span>一騎当千</span><span>無限開拓株式会社</span></div>
-      <h2 id="case-h">取ってきたリードを、<br><em>1週間で150万円</em>の着金に。</h2>
+      <div class="case-tag"><span>事例 01</span><span>一騎当千</span><span>無限開拓株式会社</span></div>
+      <h2 id="case-h"><span class="nb">取ってきたリードを、</span><br><em class="nb">1週間で150万円</em><span class="nb">の着金に。</span></h2>
       <p class="sec-lead">営業支援サービス「一騎当千」の自社案件。AIで作ったLP、ChatGPT検索、SNS広告から入ってきた問い合わせを、成約職人の営業責任者が初回商談から契約まで引き受けました。</p>
       <div class="case-grid">
         <div>
@@ -509,12 +580,12 @@ footer{border-top:1px solid var(--line);padding-block:2.5rem;font-size:.8rem;col
           </div>
         </div>
         <div class="log">
-          <div class="log-h"><span>DEAL LOG · 一騎当千</span><span>2026.11</span></div>
+          <div class="log-h"><span>商談ログ｜一騎当千</span><span>2026.11</span></div>
           <ol>
             <li><time>流入</time><span>LP・ChatGPT検索・SNS広告から問い合わせ</span><em>集客</em></li>
             <li><time>商談</time><span>営業責任者が初回ヒアリングから担当</span><em class="us">成約職人</em></li>
-            <li><time>着金</time><span>1週間で <b>150万円</b> が入金</span><em class="pd">着金</em></li>
-            <li><time>見込み</time><span>さらに 100万円 が契約の詰めに</span><em class="us">成約職人</em></li>
+            <li><time>着金</time><span>1週間で<b>150万円</b>が入金</span><em class="pd">着金</em></li>
+            <li><time>見込み</time><span>さらに100万円が契約の詰めに</span><em class="us">成約職人</em></li>
           </ol>
         </div>
       </div>
@@ -523,20 +594,30 @@ footer{border-top:1px solid var(--line);padding-block:2.5rem;font-size:.8rem;col
   </section>
 
   <section class="sec" id="pricing" aria-labelledby="price-h">
-    <p class="eyebrow">Pricing</p>
-    <h2 class="sec-h" id="price-h">月額 + 成果報酬。<br><em>固定費を上げるほど、報酬率は下がる。</em></h2>
-    <div class="limited"><span class="seats" aria-label="残り2枠"><i></i><i></i></span><p><strong>先着2社限定</strong>　どのプランでも成果報酬が通常より <strong>5%</strong> 下がります。</p></div>
-    <div class="plans">
-      <article class="plan"><div class="plan-h"><h3>Lite</h3></div><div class="fee"><b>5</b><span>万円 / 月</span></div><div class="rate"><b>30%</b><s>35%</s><small>成果報酬（先着2社価格 / 通常）</small></div><ul><li>まず数件の商談で試したい</li><li>受注単価が小さめのSaaS</li></ul><p class="fit">月の受注額 <b>200万円未満</b> なら最安</p></article>
-      <article class="plan pick"><div class="plan-h"><h3>Standard</h3><span class="tag">おすすめ</span></div><div class="fee"><b>15</b><span>万円 / 月</span></div><div class="rate"><b>25%</b><s>30%</s><small>成果報酬（先着2社価格 / 通常）</small></div><ul><li>毎月コンスタントにリードがある</li><li>営業責任者をまだ採用していない</li></ul><p class="fit">月の受注額 <b>200〜300万円</b> なら最安</p></article>
-      <article class="plan"><div class="plan-h"><h3>Pro</h3></div><div class="fee"><b>30</b><span>万円 / 月</span></div><div class="rate"><b>20%</b><s>25%</s><small>成果報酬（先着2社価格 / 通常）</small></div><ul><li>受注単価が大きいAI開発・導入案件</li><li>リードが多く、取りこぼしが痛い</li></ul><p class="fit">月の受注額 <b>300万円以上</b> なら最安</p></article>
+    <p class="eyebrow">料金</p>
+    <h2 class="sec-h" id="price-h">月額＋成果報酬。<br><em><span class="nb">固定費を上げるほど、</span><span class="nb">報酬率は下がる。</span></em></h2>
+    <div class="limited"><span class="seats" role="img" aria-label="残り2枠"><i></i><i></i></span><p><strong>先着2社限定</strong>　どのプランでも成果報酬が通常より<strong>5%低く</strong>なります（例：35% → 30%）。</p></div>
+    <div class="monthly">
+      <h3>月額でやること</h3>
+      <ul>
+        <li><b>サービス設計の見直し</b><span>誰に、何を、いくらで売るか。売れるところで売れる形に組み替えます。</span></li>
+        <li><b>売れる形に合わせた商品づくり</b><span>見直した設計に合わせて、商品・プランの中身を一緒に作り直します。</span></li>
+        <li><b>商談の型づくり</b><span>ヒアリング、提案、見積の流れを、御社の商材に合わせて固めます。</span></li>
+      </ul>
+      <p>成約職人自身も、サービス設計をガラッと変えてから1週間で150万円を売れるようになりました。</p>
     </div>
-    <p class="note">※ 金額は税別。成果報酬は成約職人が担当した商談の<b>初年度分の受注金額のみ</b>にかかります。2年目以降の更新・継続課金には成果報酬はかかりません。</p>
+    <div class="term"><span class="term-k">契約期間</span><span><b>最低6か月</b>から。営業の仕組みは1〜2か月では固まらないため、半年単位でお引き受けしています。</span></div>
+    <div class="plans">
+      <article class="plan"><div class="plan-h"><h3>ライト</h3></div><div class="fee"><b>5</b><span>万円 / 月</span></div><div class="rate"><b>30%</b><s>35%</s><small>成果報酬（先着2社価格 / 通常）</small></div><ul><li>小さく始めたい</li><li>受注単価が小さめのSaaS</li></ul><p class="fit">月の受注額 <b>200万円未満</b> なら最安</p></article>
+      <article class="plan pick"><div class="plan-h"><h3>スタンダード</h3><span class="tag">おすすめ</span></div><div class="fee"><b>15</b><span>万円 / 月</span></div><div class="rate"><b>25%</b><s>30%</s><small>成果報酬（先着2社価格 / 通常）</small></div><ul><li>毎月コンスタントにリードがある</li><li>営業責任者をまだ採用していない</li></ul><p class="fit">月の受注額 <b>200〜300万円</b> なら最安</p></article>
+      <article class="plan"><div class="plan-h"><h3>プロ</h3></div><div class="fee"><b>30</b><span>万円 / 月</span></div><div class="rate"><b>20%</b><s>25%</s><small>成果報酬（先着2社価格 / 通常）</small></div><ul><li>受注単価が大きいAI開発・導入案件</li><li>リードが多く、取りこぼしが痛い</li></ul><p class="fit">月の受注額 <b>300万円以上</b> なら最安</p></article>
+    </div>
+    <p class="note">※ 金額は税別。契約期間は最低6か月です。成果報酬は成約職人が担当した商談の<b>初年度分の受注金額のみ</b>にかかります。2年目以降の更新・継続課金には成果報酬はかかりません。</p>
   </section>
 
   <section class="sec" id="sim" aria-labelledby="sim-h">
-    <p class="eyebrow">Simulator</p>
-    <h2 class="sec-h" id="sim-h">どのプランが得か、<em>数字で確かめる。</em></h2>
+    <p class="eyebrow">費用シミュレーション</p>
+    <h2 class="sec-h" id="sim-h"><span class="nb">どのプランが得か、</span><em class="nb">数字で確かめる。</em></h2>
     <div class="sim">
       <div class="inputs">
         <div class="field"><label for="deals">渡すリード数 / 月 <output id="deals-o" for="deals">10件</output></label><input id="deals" type="range" min="1" max="40" step="1" value="10"></div>
@@ -552,18 +633,30 @@ footer{border-top:1px solid var(--line);padding-block:2.5rem;font-size:.8rem;col
     </div>
   </section>
 
+  <section class="sec" id="faq" aria-labelledby="faq-h">
+    <p class="eyebrow">質問</p>
+    <h2 class="sec-h" id="faq-h">よくある質問</h2>
+    <div class="faq">
+      <details><summary>契約期間はどれくらいですか？</summary><p>最低6か月からです。商談の型づくりと改善に一定の期間が必要なため、半年単位でお引き受けしています。</p></details>
+      <details><summary>リードも用意してもらえますか？</summary><p>リード獲得（テレアポ・広告・リスト作成）は行いません。御社が獲得したリードを、営業責任者として契約締結、初回着金まで担当します。</p></details>
+      <details><summary>成果報酬はどこまでかかりますか？</summary><p>成約職人が担当した商談の、初年度分の受注金額のみです。2年目以降の更新・継続課金にはかかりません。</p></details>
+      <details><summary>成約率はどれくらいですか？</summary><p>実績は30〜40%です。ただし、問い合わせ・紹介・広告・リスト営業など、リードの種類によって変わります。</p></details>
+      <details><summary>技術的な質問にも答えられますか？</summary><p>提案に必要な範囲は事前に学びます。技術の深掘りが必要な場面だけ、御社の方に同席をお願いしています。</p></details>
+    </div>
+  </section>
+
   <section class="sec" id="contact" aria-labelledby="contact-h">
     <div class="contact">
       <div>
-        <p class="eyebrow">Contact</p>
-        <h2 class="sec-h" id="contact-h">止まっている商談、<br><em>見せてください。</em></h2>
+        <p class="eyebrow">お問い合わせ</p>
+        <h2 class="sec-h" id="contact-h"><span class="nb">止まっている商談、</span><br><em class="nb">見せてください。</em></h2>
         <p class="sec-lead">いま動いている商談の状況と商材を教えてください。引き受けられるかどうか、どのプランが合うかを30分でお伝えします。</p>
       </div>
       <form id="form" novalidate>
         <label for="f-co">会社名<input id="f-co" type="text" autocomplete="organization"></label>
         <label for="f-name">お名前<input id="f-name" type="text" autocomplete="name"></label>
         <label for="f-mail">メールアドレス<input id="f-mail" type="email" autocomplete="email"></label>
-        <label for="f-plan">気になるプラン<select id="f-plan"><option>まだ決めていない</option><option>Lite（月5万円）</option><option>Standard（月15万円）</option><option>Pro（月30万円）</option></select></label>
+        <label for="f-plan">気になるプラン<select id="f-plan"><option>まだ決めていない</option><option>ライト（月5万円）</option><option>スタンダード（月15万円）</option><option>プロ（月30万円）</option></select></label>
         <label for="f-msg">商材と商談の状況<textarea id="f-msg" placeholder="例：製造業向けの画像検査AI。デモ後に検討中のまま止まっている商談が5件。"></textarea></label>
         <button class="btn coral" type="submit">無料相談を申し込む <span class="arr">→</span></button>
         <p class="form-msg" id="f-out">※ このフォームは見本です。公開時に送信先を接続してください。</p>
@@ -576,11 +669,12 @@ footer{border-top:1px solid var(--line);padding-block:2.5rem;font-size:.8rem;col
 
 <script>
 (() => {
+  document.documentElement.lang = "ja";
   const $ = (id) => document.getElementById(id);
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // 訴求の切り替え: リンクの末尾 #closer などでファーストビューを差し替える
-  const VARIANTS = [{"id": "shikumi", "angle": "仕組み", "target": "AIの仕組み化は進んでいるが、営業は属人のままの会社", "h1": ["AIの仕組みは", "あるけど、", "|", "*営業の仕組み", "つくりませんか？"], "lead": "成約職人は、AI・IT企業のためのクロージングチームです。リードは御社が取ってくる。そこから先は、私たちが営業責任者として商談を回し、", "cta": "商談を任せてみる"}, {"id": "closer", "angle": "クローザー不在", "target": "プロダクトもリードもあるのに、契約を決め切る人がいない会社", "h1": ["良い仕組み", "だけど、", "|", "*クローザー", "がいない。"], "lead": "プロダクトもある。リードも来ている。足りないのは、契約まで持っていく人だけです。成約職人が営業責任者として商談に入り、", "cta": "クローザーを入れる"}, {"id": "saiyo", "angle": "採用の代わり", "target": "営業責任者を採用しようとして、決まらない・高すぎる会社", "h1": ["営業責任者を", "採用する前に、", "|", "*月5万円", "から", "試しませんか？"], "lead": "営業責任者の採用は、年収も時間もかかり、決まる保証もありません。成約職人なら来月から商談に入れます。リードを渡せば、", "cta": "まず1か月試す"}, {"id": "inquiry", "angle": "リードの取りこぼし", "target": "問い合わせ・資料請求は来るが、売上に変わっていない会社", "h1": ["問い合わせは", "来るのに、", "|", "*売上", "にならない。"], "lead": "広告もSEOも回っている。それでも売上が伸びないなら、問題は商談のあとです。成約職人が営業責任者として、来たリードを一件ずつ", "cta": "止まっているリードを相談する"}, {"id": "focus", "angle": "開発に集中", "target": "社長やエンジニアが営業を兼任して、開発が止まっている会社", "h1": ["社長も", "エンジニアも、", "|", "*もう営業", "しなくていい。"], "lead": "作る人が売る人を兼ねると、開発も営業も中途半端になります。商談は成約職人の営業責任者に任せてください。リードを渡せば、", "cta": "営業を手放す"}, {"id": "kentou", "angle": "検討止まり", "target": "デモの評価は高いのに「検討します」で止まる会社", "h1": ["「すごいですね、", "検討します」で", "|", "*終わらせない。"], "lead": "良いデモのあとに商談が止まるのは、決裁者が動く理由を渡せていないからです。成約職人が費用対効果と導入の道筋を示し、", "cta": "止まった商談を見せる"}, {"id": "chakkin", "angle": "入金まで", "target": "受注しても入金・稼働までに失速しがちな会社", "h1": ["契約で", "終わらせない。", "|", "*初回着金", "まで", "追いかける。"], "lead": "「契約しました」で営業が手を離すと、稼働も入金もずれ込みます。成約職人は営業責任者として、受注のその先まで責任を持ち、", "cta": "着金まで任せる"}, {"id": "ikki", "angle": "実績", "target": "数字で判断したい、実績重視の決裁者", "h1": ["1週間で", "*150万円", "着金。", "|", "そのクロージングを", "御社にも。"], "lead": "自社サービス「一騎当千」では、取ってきたリードを1週間で150万円の着金に変え、さらに100万円が見込みに入っています。同じやり方で、", "cta": "同じやり方で売ってもらう"}, {"id": "seika", "angle": "成果報酬", "target": "固定費の高い営業代行に失敗したことがある会社", "h1": ["報酬の大半は、", "|", "*成約", "したときだけ。"], "lead": "月額は5万円から。報酬の大部分は成約した初年度分の受注金額に応じた成果報酬です。売れなければ、かかるのは月額だけです。成約職人が", "cta": "成果報酬で相談する"}];
+  const VARIANTS = [{"id": "shikumi", "angle": "仕組み", "target": "AIの仕組み化は進んでいるが、営業は属人のままの会社", "h1": ["AIの仕組みは", "あるけど、", "|", "*営業の仕組み", "つくりませんか？"], "lead": "成約職人は、AI・IT企業のためのクロージングチームです。リードは御社が取ってくる。そこから先は、私たちが営業責任者として商談を回し、", "cta": "商談を任せてみる"}, {"id": "closer", "angle": "クローザー不在", "target": "プロダクトもリードもあるのに、契約を決め切る人がいない会社", "h1": ["良い仕組み", "だけど、", "|", "*クローザー", "がいない。"], "lead": "プロダクトもある。リードも来ている。足りないのは、契約まで持っていく人だけです。成約職人が営業責任者として商談に入り、", "cta": "クローザーを入れる"}, {"id": "saiyo", "angle": "採用の代わり", "target": "営業責任者を採用しようとして、決まらない・高すぎる会社", "h1": ["営業責任者を", "採用する前に、", "|", "*月5万円", "から", "始めませんか？"], "lead": "営業責任者の採用は、年収も時間もかかり、決まる保証もありません。成約職人なら月5万円から、6か月の契約で営業責任者が入ります。リードを渡せば、", "cta": "月5万円から始める"}, {"id": "inquiry", "angle": "リードの取りこぼし", "target": "問い合わせ・資料請求は来るが、売上に変わっていない会社", "h1": ["問い合わせは", "来るのに、", "|", "*売上", "にならない。"], "lead": "広告もSEOも回っている。それでも売上が伸びないなら、問題は商談のあとです。成約職人が営業責任者として、来たリードを一件ずつ", "cta": "止まっているリードを相談する"}, {"id": "focus", "angle": "開発に集中", "target": "社長やエンジニアが営業を兼任して、開発が止まっている会社", "h1": ["社長も", "エンジニアも、", "|", "*もう営業", "しなくていい。"], "lead": "作る人が売る人を兼ねると、開発も営業も中途半端になります。商談は成約職人の営業責任者に任せてください。リードを渡せば、", "cta": "営業を手放す"}, {"id": "kentou", "angle": "検討止まり", "target": "デモの評価は高いのに「検討します」で止まる会社", "h1": ["「すごいですね、", "検討します」で", "|", "*終わらせない。"], "lead": "良いデモのあとに商談が止まるのは、決裁者が動く理由を渡せていないからです。成約職人が費用対効果と導入の道筋を示し、", "cta": "止まった商談を見せる"}, {"id": "chakkin", "angle": "入金まで", "target": "受注しても入金・稼働までに失速しがちな会社", "h1": ["契約で", "終わらせない。", "|", "*初回着金", "まで", "追いかける。"], "lead": "「契約しました」で営業が手を離すと、稼働も入金もずれ込みます。成約職人は営業責任者として、受注のその先まで責任を持ち、", "cta": "着金まで任せる"}, {"id": "ikki", "angle": "実績", "target": "数字で判断したい、実績重視の決裁者", "h1": ["1週間で", "*150万円", "着金。", "|", "そのクロージングを", "御社にも。"], "lead": "自社サービス「一騎当千」では、取ってきたリードを1週間で150万円の着金に変え、さらに100万円が見込みに入っています。同じやり方で、", "cta": "同じやり方で売ってもらう"}, {"id": "seika", "angle": "成果報酬", "target": "固定費の高い営業代行に失敗したことがある会社", "h1": ["報酬の大半は、", "|", "*成約", "したときだけ。"], "lead": "月額は5万円から。報酬の大部分は成約した初年度分の受注金額に応じた成果報酬です。売れなければ、かかるのは月額だけです。成約職人が", "cta": "成果報酬で相談する"}];
   const esc = (t) => t.replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
   function applyVariant() {
     const v = VARIANTS.find(x => "#" + x.id === location.hash);
@@ -597,7 +691,7 @@ footer{border-top:1px solid var(--line);padding-block:2.5rem;font-size:.8rem;col
     ["c","商","初回商談を設定","製造業｜AI外観検査","11/04"],
     ["n","聞","ヒアリング完了","課題・予算・決裁者・時期","4/4"],
     ["c","提","提案書を送付","工場長向け 回収8か月","PDF"],
-    ["c","見","見積を提示","初年度 合計","¥4.8M"],
+    ["c","見","見積を提示","初年度 合計","480万円"],
     ["n","稟","稟議が承認","課長 → 部長 → 工場長","3/3"],
     ["g","契","契約締結","電子署名 完了","✓"],
     ["g","¥","初回着金を確認","初期導入費","+¥1,500,000"],
@@ -654,13 +748,20 @@ footer{border-top:1px solid var(--line);padding-block:2.5rem;font-size:.8rem;col
   const io = new IntersectionObserver((es) => es.forEach(e => {
     if (!e.isIntersecting) return; io.unobserve(e.target);
     const to = +e.target.dataset.count;
-    countUp(e.target, to, n => `${n}<small>万円</small>`.replace(/<small>.*/, "") , 900);
-    setTimeout(() => { e.target.innerHTML = `${to}<small>万円</small>`; }, reduce ? 0 : 950);
+    if (reduce) return;
+    const t0 = performance.now();
+    const tick = (t) => { const k = Math.min(1, (t - t0) / 900), n = Math.round(to * (1 - Math.pow(1 - k, 3))); e.target.innerHTML = `${n}<small>万円</small>`; if (k < 1) requestAnimationFrame(tick); };
+    requestAnimationFrame(tick);
   }), { threshold: .5 });
   document.querySelectorAll("[data-count]").forEach(el => io.observe(el));
 
+  // 好循環のハイライトを順番に回す
+  const loopItems = [...document.querySelectorAll("#loop li")];
+  let li = 0;
+  if (!reduce) setInterval(() => { loopItems[li].classList.remove("on"); li = (li + 1) % loopItems.length; loopItems[li].classList.add("on"); }, 1700);
+
   // シミュレーター
-  const plans = [{ name: "Lite", fee: 5, limited: 30, normal: 35 }, { name: "Standard", fee: 15, limited: 25, normal: 30 }, { name: "Pro", fee: 30, limited: 20, normal: 25 }];
+  const plans = [{ name: "ライト", fee: 5, limited: 30, normal: 35 }, { name: "スタンダード", fee: 15, limited: 25, normal: 30 }, { name: "プロ", fee: 30, limited: 20, normal: 25 }];
   let mode = "limited";
   const fmt = (n) => (Math.round(n * 10) / 10).toLocaleString("ja-JP") + "万円";
   function render() {
@@ -671,7 +772,7 @@ footer{border-top:1px solid var(--line);padding-block:2.5rem;font-size:.8rem;col
     const rows = plans.map(p => { const rate = p[mode], reward = rev * rate / 100; return { ...p, rate, reward, total: p.fee + reward }; });
     const best = rows.reduce((a, b) => (b.total < a.total ? b : a));
     $("r-body").innerHTML = rows.map(r => `<tr class="${r === best ? "best" : ""}"><td>${r.name}</td><td>${fmt(r.fee)}</td><td>${fmt(r.reward)} <small>(${r.rate}%)</small></td><td>${fmt(r.total)}</td><td>${rev ? (r.total / rev * 100).toFixed(1) : "–"}%</td></tr>`).join("");
-    $("r-verdict").innerHTML = `この条件なら <b>${best.name}</b> が最安。費用を差し引いて手元に残る受注額は <b>${fmt(rev - best.total)}</b> / 月です。`;
+    $("r-verdict").innerHTML = `この条件なら<b>${best.name}</b>が最安です。費用を差し引いて手元に残る受注額は月<b>${fmt(rev - best.total)}</b>、最低契約期間の6か月で<b>${fmt((rev - best.total) * 6)}</b>です。`;
   }
   ["deals", "price", "win"].forEach(id => $(id).addEventListener("input", render));
   [["mode-limited", "limited"], ["mode-normal", "normal"]].forEach(([id, m]) => $(id).addEventListener("click", () => {
