@@ -2,17 +2,17 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
 <style>
-/* Layout: LPと同じ紙・墨・朱。訴求ごとに「見出しの試し刷り」を並べる */
+/* Layout: LPと同じ温かい紙色とコーラル。訴求ごとに「見出しの試し刷り」を並べる */
 :root{
-  --paper:#F3F5F8; --surface:#FFFFFF; --ink:#0F1B2D; --muted:#55627A; --line:#D9DFE8; --seal:#D8402B; --seal-soft:#FBE6E1;
-  --display:"Dela Gothic One","Zen Kaku Gothic New","Hiragino Sans",sans-serif;
+  --paper:#FAF9F5; --surface:#FFFFFF; --ink:#141413; --muted:#6B6A63; --line:#E5E2D8; --seal:#B9573A; --seal-soft:#F7E6DD;
+  --display:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho",serif;
   --body:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP",system-ui,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#0C1320;--surface:#131D2E;--ink:#E8EDF5;--muted:#9AA7BD;--line:#25324A;--seal:#F0614A;--seal-soft:#3A1C1A;color-scheme:dark}}
-:root[data-theme="dark"]{--paper:#0C1320;--surface:#131D2E;--ink:#E8EDF5;--muted:#9AA7BD;--line:#25324A;--seal:#F0614A;--seal-soft:#3A1C1A;color-scheme:dark}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#1F1E1D;--surface:#2A2927;--ink:#F0EEE6;--muted:#A3A097;--line:#3A3935;--seal:#EC9B7C;--seal-soft:#3D2A22;color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#1F1E1D;--surface:#2A2927;--ink:#F0EEE6;--muted:#A3A097;--line:#3A3935;--seal:#EC9B7C;--seal-soft:#3D2A22;color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.75;font-size:15px;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
