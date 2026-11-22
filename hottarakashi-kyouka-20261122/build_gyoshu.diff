@@ -1,0 +1,8 @@
+387a388,394
+>     # ★検索される言葉に合わせる（2026-11-22 上野さん「全部チェックお願い」）★ 題名・説明・見出しの小さい字・よくある質問3問。
+>     #   中身は ../lp_kensaku_kyouka.py の SEO 表（本番に直接当てる物と同じ）。作り直しても元の題名に戻らないように
+>     import lp_kensaku_kyouka as KK
+>     if g["id"] in KK.SEO:
+>         s, _t, _d, errs = KK.patch(s, g["id"])
+>         if errs:
+>             sys.exit(f"検索の言葉の目印が合いません {g['id']}: {errs}")
